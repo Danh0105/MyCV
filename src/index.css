@@ -1,0 +1,114 @@
+:root {
+  --primary: #0d6efd;
+  --text: #222;
+  --muted: #6c757d;
+}
+
+body {
+  background: #f8f9fa;
+  color: var(--text);
+}
+
+.cv-container {
+  max-width: 1024px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.page {
+  background: #fff;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
+  border-radius: .75rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.05rem;
+  letter-spacing: .04em;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  margin-bottom: .75rem;
+}
+
+.kpi-badge {
+  font-size: .8rem;
+  border: 1px solid rgba(13, 110, 253, .25);
+  color: var(--primary);
+  padding: .15rem .5rem;
+  border-radius: .5rem;
+  background: rgba(13, 110, 253, .05);
+}
+
+.item-title {
+  font-weight: 700;
+}
+
+.item-subtitle {
+  color: var(--muted);
+}
+
+ul.compact li {
+  margin-bottom: .25rem;
+}
+
+.link-muted a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.link-muted a:hover {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: #fff;
+  }
+
+  .page {
+    box-shadow: none !important;
+    margin: 0;
+    border-radius: 0;
+    page-break-after: always;
+  }
+
+  .page:last-child {
+    page-break-after: auto;
+  }
+
+  .cv-container {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  a[href]:after {
+    content: "";
+  }
+}
+
+/* Avatar sizing + cover */
+.avatar-lg {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .avatar-lg {
+    width: 112px;
+    height: 112px;
+  }
+}
+
+/* Khi in PDF */
+@media print {
+  .avatar-lg {
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
