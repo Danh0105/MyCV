@@ -15,14 +15,41 @@ body {
   padding: 0 1rem;
 }
 
-.page {
-  background: #fff;
+/* ===== PAGE BASE ===== */
+.page1,
+.page2,
+.page3,
+.page4 {
+  background: #fff !important;
   box-shadow: 0 6px 24px rgba(0, 0, 0, .08);
   border-radius: .75rem;
-  padding: 2rem;
+  padding: 16mm;
   margin-bottom: 2rem;
+  box-sizing: border-box;
+
+  width: 210mm;
+  page-break-after: always;
+  break-after: page;
 }
 
+/* chỉnh chiều cao từng trang */
+.page1 {
+  height: 230mm;
+}
+
+.page2 {
+  height: 165mm;
+}
+
+.page3 {
+  height: 175mm;
+}
+
+.page4 {
+  height: 215mm;
+}
+
+/* ===== TYPO ===== */
 .section-title {
   font-size: 1.05rem;
   letter-spacing: .04em;
@@ -53,6 +80,7 @@ ul.compact li {
   margin-bottom: .25rem;
 }
 
+/* ===== LINKS ===== */
 .link-muted a {
   color: inherit;
   text-decoration: none;
@@ -63,34 +91,7 @@ ul.compact li {
   text-decoration: underline;
 }
 
-/* Print styles */
-@media print {
-  body {
-    background: #fff;
-  }
-
-  .page {
-    box-shadow: none !important;
-    margin: 0;
-    border-radius: 0;
-    page-break-after: always;
-  }
-
-  .page:last-child {
-    page-break-after: auto;
-  }
-
-  .cv-container {
-    margin: 0;
-    max-width: 100%;
-  }
-
-  a[href]:after {
-    content: "";
-  }
-}
-
-/* Avatar sizing + cover */
+/* ===== AVATAR ===== */
 .avatar-lg {
   width: 96px;
   height: 96px;
@@ -104,8 +105,48 @@ ul.compact li {
   }
 }
 
-/* Khi in PDF */
+/* ===== CERTIFICATE ===== */
+.certificate-block {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.certificate-img {
+  width: 100%;
+  max-width: 520px;
+  max-height: 360px;
+  object-fit: contain;
+  border: 1px solid #dee2e6;
+  border-radius: .5rem;
+  margin-top: .5rem;
+}
+
+/* ===== PRINT ===== */
 @media print {
+  body {
+    background: #fff;
+  }
+
+  .cv-container {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  a[href]:after {
+    content: "";
+  }
+
+  section,
+  article,
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
   .avatar-lg {
     box-shadow: none !important;
     -webkit-print-color-adjust: exact;

@@ -1,8 +1,7 @@
 import React from "react";
 import avatar from './assets/avatar.jpg'
-const SrOnly = ({ children }) => (
-  <span className="visually-hidden">{children}</span>
-);
+import html2pdf from "html2pdf.js/dist/html2pdf.bundle.min.js";
+
 
 const Header = () => {
   const age = getAge("2000-05-01"); // 01/05/2000
@@ -131,10 +130,34 @@ const ProjectsItem = ({ name, role, tech, period, bullets, link }) => (
 );
 
 export default function App() {
+  const downloadPDF = () => {
+    const element = document.querySelector(".cv-container");
+
+    html2pdf()
+      .set({
+        margin: 0,
+        filename: "Nguyen-Xuan-Danh-CV.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+      })
+      .from(element)
+      .save();
+  };
+  const openLink = (url) => {
+    window.open(url, "_blank");
+  };
   return (
     <main className="cv-container" role="main">
       {/* PAGE 1 */}
-      <div className="page">
+      <div className="d-flex justify-content-end mb-3 no-print">
+        <button onClick={downloadPDF} className="btn btn-primary btn-sm no-print">
+          ⬇️ Download CV (PDF)
+        </button>
+
+      </div>
+
+      <div className="page1">
         <Header />
 
         <Section id="summary" title="Professional Summary">
@@ -189,6 +212,11 @@ export default function App() {
           </div>
         </Section>
 
+
+      </div>
+
+      {/* PAGE 2 */}
+      <div className="page2">
         <Section id="experience" title="Professional Experience">
           <ExperienceItem
             role="Full-stack Developer"
@@ -219,10 +247,10 @@ export default function App() {
             ]}
           />
         </Section>
-      </div>
 
-      {/* PAGE 2 */}
-      <div className="page">
+
+      </div>
+      <div className="page3">
         <Section id="projects" title="Selected Projects">
           <ProjectsItem
             name="KidoEdu.vn – Full-stack E-commerce EdTech Platform"
@@ -263,7 +291,8 @@ export default function App() {
             ]}
           />
         </Section>
-
+      </div>
+      <div className="page4">
         <Section id="education" title="Education">
           <div className="d-flex justify-content-between">
             <div>
@@ -280,14 +309,14 @@ export default function App() {
         <Section id="certs" title="Certificates">
           <div className="row">
             <div className="col-md-6">
-              <div className="border rounded p-3 h-100">
+              <div className="border rounded p-3 h-100" onClick={() => openLink('https://res.cloudinary.com/dlnkeb4dm/image/upload/v1767154668/mcutipemc62pkjbi4hnh.jpg')} style={{ cursor: 'pointer' }}>
                 <div className="fw-bold">Certificate of Achievement</div>
                 <div className="text-muted">Appscyclone • 2023</div>
               </div>
             </div>
             <div className="col-md-6">
-              <div className="border rounded p-3 h-100">
-                <div className="fw-bold">Bachelor of Computer Science</div>
+              <div className="border rounded p-3 h-100" onClick={() => openLink('https://res.cloudinary.com/dlnkeb4dm/image/upload/v1767153115/engchd8sd2s64tkuiqtm.jpg')} style={{ cursor: 'pointer' }}>
+                <div className="fw-bold">Information technology engineer</div>
                 <div className="text-muted">Can Tho University • 2023</div>
               </div>
             </div>
@@ -328,7 +357,6 @@ export default function App() {
           </div>
         </Section>
       </div>
-
     </main>
   );
 }
